@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Ligar telemóvel · JJR Gasóleo</title>
+<link rel="stylesheet" href="css/fonts.css">
+<style>
+  body { margin: 0; font: 500 17px/1.4 'Barlow', system-ui, sans-serif; background: #f1f5f9; color: #17212b; padding: 20px; }
+  main { max-width: 520px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 22px; box-shadow: 0 6px 18px rgba(11,40,70,.1); }
+  h1 { font: 800 32px 'Barlow Condensed', sans-serif; letter-spacing: .6px; text-transform: uppercase; color: #0b4a7d; margin: 0 0 6px; }
+  p { color: #5d6f80; margin: 0 0 14px; }
+  label { display: block; font: 700 12.5px 'Barlow', sans-serif; letter-spacing: 1.6px; text-transform: uppercase; color: #5d6f80; margin: 14px 0 6px; }
+  input, textarea { width: 100%; box-sizing: border-box; font: inherit; padding: 13px; border: 2.5px solid #dde5ec; border-radius: 14px; }
+  textarea { min-height: 120px; word-break: break-all; background: #f6f9fc; }
+  button { margin-top: 16px; width: 100%; min-height: 58px; border: 0; border-radius: 16px; background: #1a8fd0; color: #fff; font: 800 22px 'Barlow Condensed', sans-serif; letter-spacing: 1.2px; text-transform: uppercase; }
+  .warn { margin-top: 16px; font-size: 15px; background: #fff1e0; color: #8a3a00; padding: 12px; border-radius: 12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Ligar telemóvel</h1>
+  <p>Gera o link que liga a app à folha Google. Envia-o ao chefe em mensagem privada: ao abrir, a app fica pronta sozinha.</p>
+  <label for="app">Endereço da app</label>
+  <input id="app" autocapitalize="off">
+  <label for="url">Endereço do Apps Script (termina em /exec)</label>
+  <input id="url" placeholder="https://script.google.com/macros/s/…/exec" autocapitalize="off">
+  <label for="tok">Código secreto (o mesmo do Code.gs)</label>
+  <input id="tok" autocapitalize="off">
+  <label for="nome">Nome do chefe de equipa</label>
+  <input id="nome" value="Carlos Costa">
+  <label for="out">Link para o chefe</label>
+  <textarea id="out" readonly></textarea>
+  <button id="copy" type="button">Copiar link</button>
+  <div class="warn">Este link contém o código secreto. Envia-o só ao chefe, em mensagem direta.</div>
+</main>
+<script>
+  const $ = (id) => document.getElementById(id);
+  $('app').value = location.href.replace(/ligar\.html.*$/, '');
+  const build = () => {
+    const base = $('app').value.trim(), url = $('url').value.trim(), t = $('tok').value.trim(), n = $('nome').value.trim();
+    $('out').value = base && url && t ? `${base}#setup=${encodeURIComponent(url)}&t=${encodeURIComponent(t)}${n ? '&n=' + encodeURIComponent(n) : ''}` : '';
+  };
+  ['app', 'url', 'tok', 'nome'].forEach((i) => $(i).addEventListener('input', build));
+  $('copy').onclick = async () => { build(); try { await navigator.clipboard.writeText($('out').value); $('copy').textContent = 'Copiado ✓'; } catch { $('out').select(); } };
+  build();
+</script>
+</body>
+</html>

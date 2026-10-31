@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>JJR · Gasóleo</title>
+  <meta name="description" content="Controlo diário de gasóleo, horas das máquinas e depósito da carrinha.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1c2126">
+  <meta name="color-scheme" content="light">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Gasóleo">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="img/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preload" href="fonts/BarlowCondensed-800.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="demo-bar" class="demo-bar" hidden><span>Apresentação · dados fictícios</span><button id="demo-exit" type="button">Sair</button></div>
+  <div id="app"><div id="view"></div></div>
+
+  <nav class="tabs" aria-label="Navegação">
+    <button class="tab on" data-view="hoje" type="button"><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg><span>Hoje</span></button>
+    <button class="tab" data-view="maquinas" type="button"><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a2 2 0 100-4 2 2 0 000 4zM17 19a2 2 0 100-4 2 2 0 000 4z"/></svg><span>Máquinas</span></button>
+    <button class="tab" data-view="mes" type="button"><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Mês</span></button>
+  </nav>
+
+  <div id="layers"></div>
+  <div id="toasts" aria-live="polite"></div>
+  <noscript>Esta aplicação precisa de JavaScript.</noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
